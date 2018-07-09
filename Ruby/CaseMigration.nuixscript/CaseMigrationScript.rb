@@ -1,5 +1,3 @@
-# Menu Title: Case Migrater
-
 require "csv"
 require "java"
 java_import javax.swing.JOptionPane
