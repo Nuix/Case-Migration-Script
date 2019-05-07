@@ -5,6 +5,16 @@ java_import javax.swing.JFileChooser
 java_import javax.swing.filechooser.FileNameExtensionFilter
 java_import javax.swing.JDialog
 java_import org.apache.commons.io.FileUtils
+java_import javax.swing.UIManager
+
+if UIManager.getLookAndFeel.getName == "Metal"
+	UIManager.getInstalledLookAndFeels.each do |info|
+		if info.getName == "Windows"
+			UIManager.setLookAndFeel(info.getClassName)
+			break
+		end
+	end
+end
 
 #Shows a dialog allowing the user to pick a choice
 def show_options(message,options,default=nil,title="Options")
