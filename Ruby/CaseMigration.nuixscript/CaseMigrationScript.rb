@@ -1,5 +1,6 @@
 require "csv"
 require "java"
+require "pathname"
 java_import javax.swing.JOptionPane
 java_import javax.swing.JFileChooser
 java_import javax.swing.filechooser.FileNameExtensionFilter
@@ -83,8 +84,8 @@ def find_case_directories(search_directories)
 	search_directories = Array(search_directories)
 	search_directories = search_directories.map{|d|!d.is_a?(String) ? d.getAbsolutePath : d }
 	search_directories.each do |search_directory|
-		fbi_paths = Dir.glob("#{search_directory}/**/case.fbi2")
-		result += fbi_paths.map{|p|File.dirname(p).gsub("/","\\")}
+		fbi_paths = Dir.glob(File.join(search_directory, "**", "case.fbi2"))
+		result += fbi_paths.map{|p|File.dirname(p)}
 	end
 	return result
 end
@@ -105,7 +106,7 @@ class Logger
 		end
 	end
 end
-Logger.log_file = "#{File.dirname(__FILE__)}\\#{time_stamp}_Log.txt"
+Logger.log_file = File.join(File.dirname(__FILE__), "#{time_stamp}_Log.txt")
 
 #Prompt about making backups
 message = "Do you want to make a backup of each case before migrating?"
@@ -198,7 +199,7 @@ failures = []
 successes = []
 
 #Define report file and do some the work
-report_file = "#{File.dirname(__FILE__)}\\#{time_stamp}_Report.csv"
+report_file = File.join(File.dirname(__FILE__), "#{time_stamp}_Report.csv")
 begin
 	reporter = Reporter.new(report_file)
 
@@ -209,8 +210,8 @@ begin
 		if make_backups
 			begin
 				Logger.log "(#{index+1}/#{case_paths.size}) Backing up case: #{case_path}"
-				case_name_from_dir = /\\([^\\]+)$/.match(case_path.chomp("\\"))[1]
-				case_backup_directory = backup_directory.getAbsolutePath + "\\" + case_name_from_dir
+				case_name_from_dir = Pathname.new(case_path).split.last.to_s
+				case_backup_directory = File.join(backup_directory.getAbsolutePath, case_name_from_dir)
 				Logger.log "(#{index+1}/#{case_paths.size}) Backup Destination: #{case_backup_directory}"
 				java.io.File.new(case_backup_directory).mkdirs
 				copy_directory(case_path,case_backup_directory)
