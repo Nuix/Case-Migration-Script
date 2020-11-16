@@ -156,7 +156,7 @@ if locate_cases
 		case_paths = find_case_directories(case_search_directory.getAbsolutePath)
 	end
 else
-	case_list_file = prompt_open_file("C:\\",{"Case Path List Text File (*.txt)"=>["txt"]},"Choose Case Paths Text File")
+	case_list_file = prompt_open_file(nil,{"Case Path List Text File (*.txt)"=>["txt"]},"Choose Case Paths Text File")
 
 	if case_list_file.nil? || !case_list_file.exists || case_list_file.getAbsolutePath.empty?
 		Logger.log "User did not provide an input list of case paths"

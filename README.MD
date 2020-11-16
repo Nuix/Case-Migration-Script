@@ -9,7 +9,11 @@ View the GitHub project [here](https://github.com/Nuix/Case-Migration-Script) or
 
 **Written By:** Jason Wells
 
-Migrates a list of Nuix cases to the latest case version.
+This script migrates a list of Nuix cases to the version of Nuix running the script (as necessary).  This script is the automated equivalent of opening each case one by one in Nuix Workstation (the GUI) and allowing Nuix to migrate a case whenever it prompted you to do so.
+
+The script opens each case via the API, giving Nuix permission to migrate the case as necessary.  This is done by providing a value of `true` for the setting `migrate` when opening the case via [CaseFactory.open](https://download.nuix.com/releases/desktop/stable/docs/en/scripting/api/nuix/CaseFactory.html#open-java.io.File-java.util.Map-):
+
+**migrate**: *If the case requires migration and this parameter is set to true, migrates the case if required, otherwise an exception occurs and the script will terminate. Migration occurs silently in the console.*
 
 # Getting Started
 
@@ -41,7 +45,7 @@ Output written to log file is also written to script console.
 # License
 
 ```
-Copyright 2018 Nuix
+Copyright 2020 Nuix
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
