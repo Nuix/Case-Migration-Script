@@ -1,6 +1,8 @@
 Case Migration Script
 =====================
 
+**Note**: A similar, but arguably better, script can be found in the [Bulk Case Migration](https://github.com/Nuix/Bulk-Case-Migration) repository.  In time this script will likely be archived in favor of that one.
+
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0) ![This script was last tested in Nuix 7.8](https://img.shields.io/badge/Script%20Tested%20in%20Nuix-7.8-green.svg)
 
 View the GitHub project [here](https://github.com/Nuix/Case-Migration-Script) or download the latest release [here](https://github.com/Nuix/Case-Migration-Script/releases).
